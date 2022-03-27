@@ -1,0 +1,27 @@
+1. Proposed system is expected to work on both ARM-based microcontrollers and computers.
+2. The biometric verification will be multimodal
+	i. Fingerprint verification
+	ii. Facial verification
+The administrator will elect the verification means for each instance of use. The 
+system will default to fingerprint in absence of modification of system
+settings by administrator .
+3. To reduce latency, the system will be verification-based, the user's biometric data
+will be compared to prior enrollment data.
+4. The enrolment feature of the system should only be available to designated admins/staff
+to ensure integrity of the system
+5.
+
+====================================================================================
+To address:
+1. The attendance devices should be stationary in a secure location at the venue of
+use to reduce risk of damage/tampering/misuse
+2. In the event of a usecase where a second event (lecture) is to begin immediately
+at the end of another event (lecture) are students expected to repeat the verification
+for the second lecture?
+	> There could be a signout feature for students that are not to attend second event
+	> What if there are a large number of students not slated to attend second event?
+	> Is it the system's responsibility to police fraudulent signin (a student signing in 
+	and leaving the venue)? - No
+3. How would an admin/staff get access to the attendance at the end of the verification exercise
+- will it be provided immediately by the system or will it be collated at the end of the semester,
+or both?
