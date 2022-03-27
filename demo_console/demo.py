@@ -1,10 +1,12 @@
-from fileinput import filename
+from operator import le
+import os
 import time
 import serial
 from PIL import Image
 
 import adafruit_fingerprint
 
+from db.models import Student
 
 uart = serial.Serial("/dev/ttyAMA0", baudrate=57600, timeout=1)
 
@@ -14,15 +16,46 @@ def get_sensor_storage_slot():
     i = -1
     while(i > finger.library_size - 1) or ( i < 0):
         try:
-            i = int(input(f"Enter Sensor storage slot # from 0-{finger.library_size - 1}"))
+            i = int(input(
+                f"Enter Sensor storage slot # from 0-{finger.library_size - 1}"))
         except ValueError:
             pass
     return i
 
 def get_reg_number():
     student_reg_number = input("Enter Student's registration number: ")
-    student_reg_number = student_reg_number.replace("/", "_")
-    return student_reg_number
+
+    try:
+        Student.objects.get(reg_number=student_reg_number)
+    except:
+        print("Student Enrollment")
+        first_name = input("Enter student's first name: ")
+        last_name = input("Enter student's last name: ")
+        level_of_study = input("Enter student's level of study: ")
+        new_student = Student(reg_number=student_reg_number, first_name=first_name,
+                    last_name=last_name, level_of_study=level_of_study)
+        new_student.save()
+    else:
+        print("Update Student Enrollment")
+        student = Student.objects.get(reg_number=student_reg_number)
+        print(student)
+
+    return student_reg_number.replace("/", "_")
+
+def get_reg_number_verify():
+    student_reg_number = input("Enter Student's registration number: ")
+
+    try:
+        Student.objects.get(reg_number=student_reg_number)
+    except:
+        print("Student not enrolled yet")
+        return True
+    else:
+        print("Student verification")
+        student = Student.objects.get(reg_number=student_reg_number)
+        print(student)
+
+    return student_reg_number.replace("/", "_")
 
 
 def fingerprint_enrol():
@@ -79,8 +112,10 @@ def fingerprint_enrol():
             print("Other error")
         return False
 
-    print("Storing model for %s " % reg_number, end="", flush=True)
+    print("Storing model for %s " % reg_number.replace('_','/' ), 
+            end="", flush=True)
 
+    os.makedirs(os.path.dirname(f"{reg_number}/"), exist_ok=True)
 
     ###creating image
     print("\nPlace finger one more time")
@@ -105,20 +140,23 @@ def fingerprint_enrol():
         else:
             x += 1
     try:
-        img.save(f"{reg_number}.png")
+        img.save(f"{reg_number}/{reg_number}.png")
     except:
         print("Problem saving image")
 
     ###creating template file
     data = finger.get_fpdata("char", 1)
-    with open(f"{reg_number}.dat", "wb") as file:
+    student = Student.objects.get(reg_number=reg_number.replace('_', '/'))
+    student.fingerprint_template = data #needs refactoring to ensure it is saving proper fp_data
+    student.save()
+    with open(f"{reg_number}/{reg_number}.dat", "wb") as file:
         file.write(bytearray(data))
     print("Template saved...")
 
     return True
 
 def fingerprint_verification():
-    reg_number = get_reg_number()
+    reg_number = get_reg_number_verify()
     print("Waiting for finger print...")
     while finger.get_image() != adafruit_fingerprint.OK:
         pass
@@ -127,7 +165,7 @@ def fingerprint_verification():
         return False
 
     print("Loading file template...", end="", flush=True)
-    with open(f"{reg_number}.dat", "rb") as file:
+    with open(f"{reg_number}/{reg_number}.dat", "rb") as file:
         data = file.read()
     finger.send_fpdata(list(data), "char", 2)
 
