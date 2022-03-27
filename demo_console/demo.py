@@ -83,6 +83,10 @@ def fingerprint_enrol():
 
 
     ###creating image
+    print("\nPlace finger one more time")
+    while finger.get_image():
+        pass
+    
     img = Image.new("L", (256, 288), "white")
     pixeldata = img.load()
     mask = 0b00001111
@@ -101,13 +105,13 @@ def fingerprint_enrol():
         else:
             x += 1
     try:
-        img.save(f"{reg_number}/{reg_number}.png")
+        img.save(f"{reg_number}.png")
     except:
         print("Problem saving image")
 
     ###creating template file
     data = finger.get_fpdata("char", 1)
-    with open(f"{reg_number}/{reg_number}.dat", "wb") as file:
+    with open(f"{reg_number}.dat", "wb") as file:
         file.write(bytearray(data))
     print("Template saved...")
 
@@ -123,7 +127,7 @@ def fingerprint_verification():
         return False
 
     print("Loading file template...", end="", flush=True)
-    with open(f"{reg_number}/{reg_number}.dat", "rb") as file:
+    with open(f"{reg_number}.dat", "rb") as file:
         data = file.read()
     finger.send_fpdata(list(data), "char", 2)
 
@@ -145,8 +149,8 @@ while True:
         raise RuntimeError("Failed to read templates")
     if finger.count_templates() != adafruit_fingerprint.OK:
         raise RuntimeError("Failed to read templates")
-    if finger.set_sysparam(6, 2) != adafruit_fingerprint.OK:
-        raise RuntimeError("Unable to set package size to 128!")
+    #if finger.set_sysparam(6, 2) != adafruit_fingerprint.OK:
+     #   raise RuntimeError("Unable to set package size to 128!")
     if finger.read_sysparam() != adafruit_fingerprint.OK:
         raise RuntimeError("Failed to get system parameters")
     print("e) enroll finger print")
