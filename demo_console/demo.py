@@ -25,7 +25,8 @@ def get_reg_number():
     return student_reg_number
 
 
-def fingerprint_enrol(reg_number = get_reg_number()):
+def fingerprint_enrol():
+    reg_number = get_reg_number()
     for fingerimg in range(1, 3):
         if fingerimg == 1:
             print("Place finger on sensor...", end="", flush=True)
@@ -112,7 +113,8 @@ def fingerprint_enrol(reg_number = get_reg_number()):
 
     return True
 
-def fingerprint_verification(reg_number = get_reg_number()):
+def fingerprint_verification():
+    reg_number = get_reg_number()
     print("Waiting for finger print...")
     while finger.get_image() != adafruit_fingerprint.OK:
         pass
