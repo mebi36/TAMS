@@ -25,3 +25,54 @@ for the second lecture?
 3. How would an admin/staff get access to the attendance at the end of the verification exercise
 - will it be provided immediately by the system or will it be collated at the end of the semester,
 or both?
+
+======================================================================================
+There should be two separate interfaces:
+	1.	The attendance interface: where student attendance can be taken
+		- the attendance interface should have a means for setting course, and whether the 
+			attendance is for a clecture or an exam (this should be the responsibility of either
+			the class rep or the lecturer)
+		- students should only be required to provide their registration number and biometric info.
+	2. The admin interface:
+		-	where students could be enrolled - (accessible to only group of admins)
+		-	where new courses could be added to the system (accessible to only a group of admins)
+		-	where attendance records could be accessed (all admins)
+		-	
+
+=======================================================================================
+defining groups of admins and privileges
+
+1.	superusers:
+	- can facilitate student initial enrolment and updates
+	- can add/edit new courses to the database of courses available
+	- can access all attendance records on the system
+
+2.	examofficers:
+	- can add new courses to the database of courses available
+	- can download attendance records for their department
+
+3.	lecturer:
+	- can download attendance records for their course
+	- can setup/initialize a session of attendance-taking
+
+4.	student_rep:
+	- can setup/initialize a session of attendance-taking
+
+5.	student:
+	- can provide registration id and biometric info for attendance-taking in a valid
+		attendance-taking session
+
+======================================================================================
+breaking down the student enrollment process:
+1.	Students are expected to provide their:
+	- registration id
+	- name ( first name, last name, other names)
+	- department
+	- faculty
+	- level of study
+	- biometric details (fingerprint, photo)
+
+=======================================================================================
+Department/Faculty Information:
+- There should be an interface to easily upload these details to the system in bulk and
+	also add a single new department/faculty 
