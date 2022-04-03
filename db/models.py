@@ -1,6 +1,6 @@
 from django.db import models
 from manage import init_django
-
+import numpy as np
 init_django()
 
 
@@ -18,9 +18,22 @@ class Student(models.Model):
     other_names = models.CharField(max_length=255, null=True, blank=True)
     level_of_study = models.IntegerField(null=True, blank=True)
     fingerprint_template = models.CharField(max_length=512, null=True, blank=True)
-
+    face_encodings = models.CharField(max_length=3000, null=True, blank=True)
+    
+    
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.reg_number})"
+
+    def face_enc_to_str(encodings):
+        """Convert face encodings from numpy array to string"""
+        encodings_str = ','.join(str(item) for item in encodings)
+        return encodings_str
+
+    def str_to_face_enc(enc_str):
+        """Convert encodings formatted as a string to numpy array"""
+        encodings = np.array([float(item) for item in enc_str.split(',')])
+        return encodings
+
 
 class Course(models.Model):
 

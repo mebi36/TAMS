@@ -1,4 +1,3 @@
-from operator import le
 import os
 import time
 import serial
@@ -7,6 +6,8 @@ from PIL import Image
 import adafruit_fingerprint
 
 from db.models import Student
+from utils import get_reg_number, get_reg_number_verify
+
 
 uart = serial.Serial("/dev/ttyAMA0", baudrate=57600, timeout=1)
 
@@ -21,42 +22,6 @@ def get_sensor_storage_slot():
         except ValueError:
             pass
     return i
-
-def get_reg_number():
-    student_reg_number = input("Enter Student's registration number: ")
-
-    try:
-        Student.objects.get(reg_number=student_reg_number)
-    except:
-        print("Student Enrollment")
-        first_name = input("Enter student's first name: ")
-        last_name = input("Enter student's last name: ")
-        level_of_study = input("Enter student's level of study: ")
-        new_student = Student(reg_number=student_reg_number, first_name=first_name,
-                    last_name=last_name, level_of_study=level_of_study)
-        new_student.save()
-    else:
-        print("Update Student Enrollment")
-        student = Student.objects.get(reg_number=student_reg_number)
-        print(student)
-
-    return student_reg_number.replace("/", "_")
-
-def get_reg_number_verify():
-    student_reg_number = input("Enter Student's registration number: ")
-
-    try:
-        Student.objects.get(reg_number=student_reg_number)
-    except:
-        print("Student not enrolled yet")
-        return True
-    else:
-        print("Student verification")
-        student = Student.objects.get(reg_number=student_reg_number)
-        print(student)
-
-    return student_reg_number.replace("/", "_")
-
 
 def fingerprint_enrol():
     reg_number = get_reg_number()
