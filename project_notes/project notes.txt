@@ -1,0 +1,93 @@
+1. Proposed system is expected to work on both ARM-based microcontrollers and computers.
+2. The biometric verification will be multimodal
+	i. Fingerprint verification
+	ii. Facial verification
+The administrator will elect the verification means for each instance of use. The 
+system will default to fingerprint in absence of modification of system
+settings by administrator .
+3. To reduce latency, the system will be verification-based, the user's biometric data
+will be compared to prior enrollment data.
+4. The enrolment feature of the system should only be available to designated admins/staff
+to ensure integrity of the system
+5.
+
+====================================================================================
+To address:
+1. The attendance devices should be stationary in a secure location at the venue of
+use to reduce risk of damage/tampering/misuse
+2. In the event of a usecase where a second event (lecture) is to begin immediately
+at the end of another event (lecture) are students expected to repeat the verification
+for the second lecture?
+	>There should be a feature for an admin to void a particular student's attendance 
+		(if a student is asked to leave)
+	> There could be a signout feature for students that are not to attend second event
+	> What if there are a large number of students not slated to attend second event?
+	> Is it the system's responsibility to police fraudulent signin (a student signing in 
+	and leaving the venue)? - No
+3. How would an admin/staff get access to the attendance at the end of the verification exercise
+- will it be provided immediately by the system or will it be collated at the end of the semester,
+or both?
+
+======================================================================================
+There should be two separate interfaces:
+	1.	The attendance interface: where student attendance can be taken
+		- the attendance interface should have a means for setting course, and whether the 
+			attendance is for a clecture or an exam (this should be the responsibility of either
+			the class rep or the lecturer)
+		- students should only be required to provide their registration number and biometric info.
+	2. The admin interface:
+		-	where students could be enrolled - (accessible to only group of admins)
+		-	where new courses could be added to the system (accessible to only a group of admins)
+		-	where attendance records could be accessed (all admins)
+		-	
+
+=======================================================================================
+defining groups of admins and privileges
+
+1.	superusers:
+	- can facilitate student initial enrolment and updates
+	- can add/edit new courses to the database of courses available
+	- can access all attendance records on the system
+
+2.	examofficers:
+	- can add new courses to the database of courses available
+	- can download attendance records for their department
+
+3.	lecturer:
+	###- could delegate a student_rep to setup a session of attendance-taking
+	- can download attendance records for their course
+	- can setup/initialize a session of attendance-taking
+
+4.	student_rep:
+	- can setup/initialize a session of attendance-taking
+
+5.	student:
+	- can provide registration id and biometric info for attendance-taking in a valid
+		attendance-taking session
+
+======================================================================================
+breaking down the student enrollment process:
+1.	Students are expected to provide their:
+	- registration id
+	- name ( first name, last name, other names)
+	- department
+	- faculty
+	- level of study
+	- biometric details (fingerprint, photo)
+	- department, (faculty), (school?)
+
+=======================================================================================
+Department/Faculty Information:
+- There should be an interface to easily upload these details to the system in bulk and
+	also add a single new department/faculty 
+
+=======================================================================================
+***Improving strictness in marking
+- The admin could set the start time and end time of lecture/event and every attendance
+	outside the specified time range will be voided or flagged and proveded to the lecturer
+	to handle (to avoid cases where such occurences were permitted by the lecturer)
+
+=======================================================================================
+***What happens when the device turns off and comes back on during an attendance-taking 
+	session
+=======================================================================================

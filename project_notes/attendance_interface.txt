@@ -1,0 +1,58 @@
+=====   THE ATTENDANCE INTERFACE    ====
+Detailed specifications concerning the attendance interface of the system
+
+1. The attendance interface is expected to work on both ARM-based microcontrollers and computers
+2. The biometric verification will be multimodal 
+    i. Fingerprint verification
+    ii. Facial verification
+    ***It is expected that only one mode be used for a particular attendance-taking session
+    ***The system will default to fingerprint IF A FINGERPRINT SENSOR is present and in absence
+        of the admin/convener explicitly opting for facial mode.
+
+3. To reduce latency, the system will be verification-based, the user's biometric data
+    will be compared to prior enrollment data.
+4. The enrolment feature of the system should only be available to designated staff/admins
+    to ensure integrity of the system.
+
+
+=============================   SPECIFICATIONS  ================================
+Details of how the attendance interface should function normally
+
+1.  The host device should power up and load the attendance interface
+    (Unauthorized closure of interface should be minimized)
+        - what will happen in the event of unresponsive interface?
+2.  Only a staff/student with authorization (class rep?) should be able to initialize an 
+    attendance-taking session. To be able to initialize an attendance-taking session,
+    the initiator must specify the following information
+        - the course (selected from a list)
+        - Exam/Lecture (could be a dropdown list)
+        - Start time and end time of event (Display device date/time setting with option for 
+                                    admin/user to adjust it)
+        - The mode of verification (fingerprint/face) - default to fingerprint if
+            the device is fit to handle both modes
+3. The attendance-taking session:
+    There should be a button that can end attendance-taking session at anytime
+    (will require an authorized admin to end session)
+    For a student to log his attendance for lecture/exam:
+        - He will input his registration number -with QR code or by typing 
+            (preferably QR)
+        - If his records are not found in the system, inform him. system
+            moves back to waiting for another student reg. number
+        -if his records are found, collect fingerprint/picture of face  
+            and compare with saved template/face encodings
+        -if no match provide him with the option to re-try one more time or accept
+            the error message to continue to the next student. Can not re-try more than twice
+        -if there is match print success message and request next student reg. number
+        -continue until session is ended/**suspended
+
+
+
+==============  SUGGESTIONS     ========================
+1. The devices running the attendance interfaces could be kept stationary in a secure
+    location at the venue of use to reduce risk of damage/tampering/misuse
+
+2. 
+
+============ Questions  ====================================
+1. How wiould an admin/staff get access to the attendance at the end of an
+    attendance-taking session? Could it be provided by the system?

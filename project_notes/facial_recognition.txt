@@ -1,0 +1,19 @@
+Student verification should be based on identification (i.e. 1:1)
+    -this has the advantage of reducing latency
+
+===============================================================================
+For another usecase like normal invigilation:
+    There may be need to perform identification (i.e. N:1).
+    In this scenario, there would be need to conduct the search as optimally as 
+    possible. Could begin by checking:
+    -All registered students for a particular level/class
+    -All other registered students of the department
+    -All registered students of the faculty
+    -All students of the school
+
+
+    -If a student is not registered in a department, he should not be present in a
+    departmental lecture/exam??
+    -If a student is not registered in a faculty, he should not be present in a 
+    faculty lecture/exam??
+    -Some  departments borrow departmental courses <<
