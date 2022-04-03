@@ -1,0 +1,12 @@
+1. to be able to install face_recognition, you need to install dlib
+    -dlib installation may fail in which case you will need to install cmake and add it to the environment path
+        >>sudo apt-get install cmake
+        >>PATH=$PATH:/opt/cmake/bin
+    -after which you could retry the installation
+
+2. Installation of pyzbar may not work in which case you will need to:
+    >>sudo apt-get install zbar-tools
+
+    (maybe also
+    >>sudo apt-get install build-essential libzbar-dev 
+    )
