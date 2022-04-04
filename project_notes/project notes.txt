@@ -3,7 +3,7 @@
 	i. Fingerprint verification
 	ii. Facial verification
 The administrator will elect the verification means for each instance of use. The 
-system will default to fingerprint in absence of modification of system
+system will default to facial recognition in absence of modification of system
 settings by administrator .
 3. To reduce latency, the system will be verification-based, the user's biometric data
 will be compared to prior enrollment data.
@@ -69,7 +69,7 @@ defining groups of admins and privileges
 breaking down the student enrollment process:
 1.	Students are expected to provide their:
 	- registration id
-	- name ( first name, last name, other names)
+	- name (first name, last name, other names)
 	- department
 	- faculty
 	- level of study

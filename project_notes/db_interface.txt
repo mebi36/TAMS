@@ -1,0 +1,62 @@
+=========================================================
+Student
+    -   registration number
+    -   first name, last name, other names
+    -   possible year of graduation
+    -   sex
+    -   nationality, state of origin, lga ???
+    -   department, faculty, [school], 
+    -   mode of admission (utme, jupeb, DE) - whether student transferred to current department
+    -   current level of study
+    -   admission status (active, graduated, suspended???)
+    -   facial encodings
+    -   fingerprint template
+===========================================================
+Staff
+    -   staff number
+    -   first name, last name, other names
+    -   title(s)  
+    -   sex  
+    -   department, faculty, [school]
+    -   assigned course(s)
+=============================================================
+Department
+    -   name
+    -   Faculty
+
+=============================================================
+Faculty
+    -   name
+=============================================================
+School
+    """If the schools require customized attendance sheets and
+    user interfaces:"""
+    -   name
+    -   logo
+    -   state
+==============================================================
+Course
+    -   title
+    -   code
+    -   course load
+    -   is elective?
+    -   course status (currently in curriculum, archived)
+    -   department, (faculty, school)
+=============================================================
+academic semester
+    -   name
+=============================================================
+session
+    -   name
+    -   is current session?
+=============================================================
+Attendance Session
+    -   convener
+    -   course (make it possible to filter options by faculty/department)
+    -   session (set from current session)
+    -   event type (lecture/exam/continuous assessment/lab/other)
+    -   start time
+    -   end time
+    -   session ended? (all sessions will be closed automatically at the end of
+        day the session was started)
+=============================================================
